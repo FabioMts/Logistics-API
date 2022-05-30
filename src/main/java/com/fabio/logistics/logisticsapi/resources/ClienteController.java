@@ -1,30 +1,39 @@
 package com.fabio.logistics.logisticsapi.resources;
 
 import com.fabio.logistics.logisticsapi.model.Cliente;
+import com.fabio.logistics.logisticsapi.repository.ClienteRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
+@AllArgsConstructor
 @RestController
 public class ClienteController {
+    @Autowired
+    private ClienteRepository repository;
 
     @GetMapping("/clientes")
     public List<Cliente> listar() {
-        var cliente = new Cliente();
-        cliente.setId(1L);
-        cliente.setName("Fabio");
-        cliente.setTelefone("19 9999 9999");
-        cliente.setEmail("fabio.couter");
-
-        var cliente2 = new Cliente();
-        cliente2.setId(2L);
-        cliente2.setName("Maria");
-        cliente2.setTelefone("19 8888 8888");
-        cliente2.setEmail("maria.couter");
-
-        return Arrays.asList(cliente, cliente2);
+        return repository.findAll();
     }
+
+    @GetMapping("/clientes/{clienteId}")
+    public ResponseEntity<Cliente> buscar(@PathVariable Long clienteId) {
+        Optional<Cliente> cliente = repository.findById(clienteId);
+
+        if(cliente.isPresent()) {
+            return ResponseEntity.ok(cliente.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
 }
