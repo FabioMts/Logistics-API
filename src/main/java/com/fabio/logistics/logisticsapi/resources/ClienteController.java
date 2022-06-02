@@ -2,17 +2,15 @@ package com.fabio.logistics.logisticsapi.resources;
 
 import com.fabio.logistics.logisticsapi.model.Cliente;
 import com.fabio.logistics.logisticsapi.repository.ClienteRepository;
+import com.fabio.logistics.logisticsapi.services.CatalogoClienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/clientes")
 @AllArgsConstructor
@@ -20,6 +18,7 @@ import java.util.Optional;
 public class ClienteController {
     @Autowired
     private ClienteRepository repository;
+    private CatalogoClienteService service;
 
     @GetMapping
     public List<Cliente> listar() {
@@ -35,7 +34,7 @@ public class ClienteController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-        return repository.save(cliente);
+        return service.salvar(cliente);
     }
 
     @PutMapping("/{clienteId}")
@@ -44,7 +43,9 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
         cliente.setId(clienteId);
-        cliente = repository.save(cliente);
+
+        cliente = service.salvar(cliente);
+
         return ResponseEntity.ok(cliente);
 
     }
@@ -54,7 +55,7 @@ public class ClienteController {
         if(!repository.existsById(clienteId)) {
             return ResponseEntity.notFound().build();
         }
-        repository.deleteById(clienteId);
+        service.excluir(clienteId);
         return ResponseEntity.noContent().build();
     }
 
