@@ -1,7 +1,7 @@
-package com.fabio.logistics.logisticsapi.model;
+package com.fabio.logistics.logisticsapi.domain;
 
 
-import com.fabio.logistics.logisticsapi.model.enums.StatusEntrega;
+import com.fabio.logistics.logisticsapi.domain.enums.StatusEntrega;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -51,5 +50,6 @@ public class Entrega {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dataFinalizacao;
+
 
 }

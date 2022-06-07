@@ -1,6 +1,6 @@
 package com.fabio.logistics.logisticsapi.resources;
 
-import com.fabio.logistics.logisticsapi.model.Cliente;
+import com.fabio.logistics.logisticsapi.domain.Cliente;
 import com.fabio.logistics.logisticsapi.repository.ClienteRepository;
 import com.fabio.logistics.logisticsapi.services.CatalogoClienteService;
 import lombok.AllArgsConstructor;

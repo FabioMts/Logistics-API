@@ -1,4 +1,4 @@
-package com.fabio.logistics.logisticsapi.model.enums;
+package com.fabio.logistics.logisticsapi.domain.enums;
 
 public enum StatusEntrega {
 

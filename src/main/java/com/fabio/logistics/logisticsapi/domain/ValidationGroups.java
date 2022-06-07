@@ -1,4 +1,4 @@
-package com.fabio.logistics.logisticsapi.model;
+package com.fabio.logistics.logisticsapi.domain;
 
 public interface ValidationGroups {
 

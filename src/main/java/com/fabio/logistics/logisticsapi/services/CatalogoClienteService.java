@@ -1,7 +1,7 @@
 package com.fabio.logistics.logisticsapi.services;
 
 import com.fabio.logistics.logisticsapi.exception.NegocioException;
-import com.fabio.logistics.logisticsapi.model.Cliente;
+import com.fabio.logistics.logisticsapi.domain.Cliente;
 import com.fabio.logistics.logisticsapi.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

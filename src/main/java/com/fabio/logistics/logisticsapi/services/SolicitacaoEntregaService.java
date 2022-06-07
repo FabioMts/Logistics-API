@@ -1,16 +1,13 @@
 package com.fabio.logistics.logisticsapi.services;
 
-import com.fabio.logistics.logisticsapi.exception.NegocioException;
-import com.fabio.logistics.logisticsapi.model.Cliente;
-import com.fabio.logistics.logisticsapi.model.Entrega;
-import com.fabio.logistics.logisticsapi.model.enums.StatusEntrega;
-import com.fabio.logistics.logisticsapi.repository.ClienteRepository;
+import com.fabio.logistics.logisticsapi.domain.Cliente;
+import com.fabio.logistics.logisticsapi.domain.Entrega;
+import com.fabio.logistics.logisticsapi.domain.enums.StatusEntrega;
 import com.fabio.logistics.logisticsapi.repository.EntregaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @AllArgsConstructor
