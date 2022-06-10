@@ -7,6 +7,7 @@ import com.fabio.logistics.logisticsapi.model.DestinatarioModel;
 import com.fabio.logistics.logisticsapi.model.EntregaModel;
 import com.fabio.logistics.logisticsapi.model.input.EntregaInput;
 import com.fabio.logistics.logisticsapi.repository.EntregaRepository;
+import com.fabio.logistics.logisticsapi.services.FinalizacaoEntregaService;
 import com.fabio.logistics.logisticsapi.services.SolicitacaoEntregaService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -25,6 +26,7 @@ public class EntregaController {
     private SolicitacaoEntregaService service;
     private EntregaRepository repository;
     private EntregaAssembler entregaAssembler;
+    private FinalizacaoEntregaService finalizacaoEntregaService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -33,8 +35,13 @@ public class EntregaController {
         Entrega novaEntrega = entregaAssembler.toEntity(entregainput);
         Entrega entregaSolicitada = service.solicitar(novaEntrega);
 
-
         return entregaAssembler.toModel(entregaSolicitada);
+    }
+
+    @PutMapping("/{entregaId}/finalizacao")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finalizar(@PathVariable Long entregaId) {
+        finalizacaoEntregaService.finalizar(entregaId);
     }
 
     @GetMapping
